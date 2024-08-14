@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: postgres-solidariza
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=solidariza
+      - POSTGRES_DB=solidariza
+    ports:
+      - '5433:5432'

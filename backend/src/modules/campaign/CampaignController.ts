@@ -3,7 +3,11 @@ import { prisma } from "../../database";
 
 const getCampaigns = async (req: Request, res: Response) => {
     try{
-        const campaign = await prisma.campaign.findMany()
+        const campaign = await prisma.campaign.findMany({
+            include: {
+                Donation: true
+            }
+        })
         return res.status(200).send({message: "Successful search.", campaign})
 
     }catch(error){
@@ -16,7 +20,10 @@ const getCampaignById = async (req: Request, res: Response) => {
         const { id } = req.params
         
         const campaign = await prisma.campaign.findUnique({
-            where: {campaign_id: Number(id)}
+            where: {campaign_id: Number(id)},
+            include: {
+                Donation: true
+            }
         })
 
         if(!campaign){

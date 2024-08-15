@@ -31,7 +31,7 @@ model Donation {
   value Float
   campaign_id Int
 
-  campaign Campaign @relation(fields: [campaign_id], references: [campaign_id])
+  campaign Campaign @relation(fields: [campaign_id], references: [campaign_id], onDelete: Cascade)
 
   @@map("donation")
 }

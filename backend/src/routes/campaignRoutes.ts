@@ -3,10 +3,10 @@ import CampaignController from "../modules/campaign/CampaignController";
 
 const campaignRoutes = Router();
 
-campaignRoutes.get("/getCampaigns", CampaignController.getCampaigns)
-campaignRoutes.get("/getCampaignById/:id", CampaignController.getCampaignById)
-campaignRoutes.post("/createCampaign", CampaignController.createCampaign)
-campaignRoutes.put("/updateCampaign", CampaignController.updateCampaign)
-campaignRoutes.delete("/deleteCampaign/:id", CampaignController.deleteCampaign)
+campaignRoutes.get("/", CampaignController.getCampaigns)
+campaignRoutes.get("/:id", CampaignController.getCampaignById)
+campaignRoutes.post("/", CampaignController.createCampaign)
+campaignRoutes.put("/", CampaignController.updateCampaign)
+campaignRoutes.delete("/:id", CampaignController.deleteCampaign)
 
 export { campaignRoutes };

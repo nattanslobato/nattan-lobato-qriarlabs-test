@@ -3,10 +3,10 @@ import DonationController from "../modules/donation/DonationController";
 
 const donationRoutes = Router();
 
-donationRoutes.get("/getDonations", DonationController.getDonations)
-donationRoutes.get("/getDonationById/:id", DonationController.getDonationById)
-donationRoutes.post("/createDonation", DonationController.createDonation)
-donationRoutes.put("/updateDonation", DonationController.updateDonation)
-donationRoutes.delete("/deleteDonation/:id", DonationController.deleteDonation)
+donationRoutes.get("/", DonationController.getDonations)
+donationRoutes.get("/:id", DonationController.getDonationById)
+donationRoutes.post("/", DonationController.createDonation)
+donationRoutes.put("/", DonationController.updateDonation)
+donationRoutes.delete("/:id", DonationController.deleteDonation)
 
 export { donationRoutes };

@@ -77,3 +77,8 @@ export const ValueDiv = styled.div`
     margin: 0 1rem;
 
 `
+
+export const PercentageDiv = styled.div`
+    font-size: 1.5rem;
+    margin: 0 1rem;
+`

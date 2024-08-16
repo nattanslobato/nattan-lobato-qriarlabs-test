@@ -61,6 +61,8 @@ export const CampaignDelete = styled.img.attrs({src: "/assets/delete_icon.png", 
     max-width: 4rem;
     mix-blend-mode: multiply;
 
+    cursor: pointer;
+
 `
 
 export const CounterDiv = styled.div`

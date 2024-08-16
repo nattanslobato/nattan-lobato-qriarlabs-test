@@ -16,25 +16,27 @@ import
 from "./CampaignListCard.style";
 
 
-type CampaignCardProps = {
+interface CampaignCardProps {
     campaign: {
-        Donation:{
-            value: number
-        }
-        name: string
-        target_value: number
-        image: string
-    }
+        campaign_id: number;
+        name: string;
+        target_value: number;
+        image: string;
+        Donation: { value: number }[];
+    };
+    onDelete: (id: number) => void; 
 }
 
-const CampaignListCard: React.FC<CampaignCardProps> = ({campaign}) => {
-
+const CampaignListCard: React.FC<CampaignCardProps> = ({campaign, onDelete}) => {
     const totalDonationValue = campaign.Donation.reduce((sum: number, donation) => sum + donation.value, 0);
-
     const percentage = (totalDonationValue / campaign.target_value) * 100;
-
     const formattedPercentage = percentage.toFixed(2);
 
+    const handleDeleteClick = () => {
+        if (window.confirm('Você realmente deseja deletar a campanha?')) {
+            onDelete(campaign.campaign_id);
+        }
+    };
 
 
     return(
@@ -43,14 +45,14 @@ const CampaignListCard: React.FC<CampaignCardProps> = ({campaign}) => {
             <Image src={"/imagem_teste.png"}/>
             </Link>
             <HeadCardDiv>
-            <Link href={"/Campaign"}>
+                <Link href={"/Campaign"}>
                     <CampaignName>
                         <p>{campaign.name}</p>
                     </CampaignName>
                 </Link>
                 <FeatDiv>
                     <CampaignEdit/>
-                    <CampaignDelete/>
+                    <CampaignDelete onClick={handleDeleteClick}/>
                 </FeatDiv>
             </HeadCardDiv>
                 <CounterDiv>

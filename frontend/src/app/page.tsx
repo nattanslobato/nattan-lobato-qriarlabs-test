@@ -5,6 +5,7 @@ import React from "react";
 import Header from "../components/Header";
 import { Container } from "./HomePage.style";
 import CampaignList from "@/components/CampaignList";
+import Navbar from "@/components/Navbar";
 
 interface HomePageProps {
   children?: React.ReactNode;
@@ -13,9 +14,9 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = () => {
   return (
     <Container>
-
-          <Header/>
-          <CampaignList/>
+        <Navbar/>
+        <Header/>
+        <CampaignList/>
 
     </Container>
   );

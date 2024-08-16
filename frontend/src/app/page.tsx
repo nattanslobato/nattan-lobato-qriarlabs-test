@@ -16,7 +16,7 @@ const HomePage: React.FC<HomePageProps> = () => {
     <Container>
         <Navbar/>
         <Header/>
-        <CampaignList/>
+        <CampaignList/> 
 
     </Container>
   );

@@ -1,20 +1,23 @@
-import Link from "next/link";
+"use client"
 
-export default function Home() {
+import Link from "next/link";
+import React from "react";
+import Header from "../components/Header";
+import { Container } from "./HomePage.style";
+import CampaignList from "@/components/CampaignList";
+
+interface HomePageProps {
+  children?: React.ReactNode;
+}
+
+const HomePage: React.FC<HomePageProps> = () => {
   return (
-    <main>
-      <div>
-        <br />
-        <h1>Campanhas</h1>
-        <br />
-        <Link href={"/Campaign"}>
-          <h3>Campanha</h3>
-        </Link>
-        <br />
-        <Link href={"/CreateCampaign"}>
-          <h3>Criar Campanha</h3>
-        </Link>
-      </div>
-    </main>
+    <Container>
+
+          <Header/>
+          <CampaignList/>
+
+    </Container>
   );
 }
+export default HomePage;

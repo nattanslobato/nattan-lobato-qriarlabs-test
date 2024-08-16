@@ -1,18 +1,18 @@
+"use client"
 
+import { NavbarDiv, Logo } from "./Navbar.style";
 import Link from "next/link"
 
 const Navbar = () => {
     return (
-        <div>
-
+        <NavbarDiv>
             <Link href={"/"}>
-                <img src="/logo.png" alt="Solidariza logo" width={100}/>
+                <Logo />
             </Link>
             <Link href={"/"}>
                 <h1>Campanhas</h1>
             </Link>
-            
-        </div>
+        </NavbarDiv>
     )
 }
 export default Navbar;

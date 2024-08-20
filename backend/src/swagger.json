@@ -1,0 +1,490 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Solidariza",
+      "version": "1.0.0",
+      "description": "Documentação da API com os serviços Campaign e Donation."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4000",
+        "description": "Local"
+      }
+    ],
+    "paths": {
+      "/campaign": {
+        "get": {
+          "tags": ["Campaigns"],
+          "summary": "Listar todas as campanhas",
+          "responses": {
+            "200": {
+              "description": "Successful search.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Successful search."
+                      },
+                      "campaign": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Campaign"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when searching for campaigns."
+            }
+          }
+        },
+        "post": {
+          "tags": ["Campaigns"],
+          "summary": "Criar uma nova campanha",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Campaign"
+                },
+                "examples": {
+                  "campaign": {
+                    "value": {
+                      "name": "Nome da campanha",
+                      "description": "Descricao exemplo",
+                      "target_value": 1000,
+                      "image": "Imagem"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Campaign created successfully.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Campaign created successfully."
+                      },
+                      "newCampaign": {
+                        "$ref": "#/components/schemas/Campaign"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when creating campaign."
+            }
+          }
+        },
+        "put": {
+          "tags": ["Campaigns"],
+          "summary": "Atualizar uma campanha existente",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Campaign"
+                },
+                "examples": {
+                  "campaign": {
+                    "value": {
+                      "id": 6,
+                      "name": "Nome da campanha atualizada",
+                      "description": "Descricao exemplo atualizada",
+                      "target_value": 2000,
+                      "image": "Imagem atualizada"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Campaign updated successfully.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Campaign updated successfully."
+                      },
+                      "campaign": {
+                        "$ref": "#/components/schemas/Campaign"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when updating campaign."
+            },
+            "404": {
+              "description": "Campaign not found."
+            }
+          }
+        }
+      },
+      "/campaign/{id}": {
+        "get": {
+          "tags": ["Campaigns"],
+          "summary": "Buscar campanha por Id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Campaign found.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Campaign found."
+                      },
+                      "campaign": {
+                        "$ref": "#/components/schemas/Campaign"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when searching for campaign."
+            },
+            "404": {
+              "description": "Campaign not found."
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Campaigns"],
+          "summary": "Deletar campanha por Id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Campaign successfully deleted.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Campaign successfully deleted."
+                      },
+                      "campaign": {
+                        "$ref": "#/components/schemas/Campaign"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when deleting campaign."
+            },
+            "404": {
+              "description": "Campaign not found."
+            }
+          }
+        }
+      },
+      "/donation": {
+        "get": {
+          "tags": ["Donations"],
+          "summary": "Listar todas as doações",
+          "responses": {
+            "200": {
+              "description": "Successful search.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Successful search."
+                      },
+                      "donation": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Donation"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when searching for donations."
+            }
+          }
+        },
+        "post": {
+          "tags": ["Donations"],
+          "summary": "Criar uma nova doação",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Donation"
+                },
+                "examples": {
+                  "donations": {
+                    "value": {
+                      "name": "Caio",
+                      "value": 100,
+                      "campaign_id": 6
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Donation created successfully.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Donation created successfully."
+                      },
+                      "newDonation": {
+                        "$ref": "#/components/schemas/Donation"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when creating donation."
+            }
+          }
+        },
+        "put": {
+          "tags": ["Donations"],
+          "summary": "Atualizar uma doação existente",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Donation"
+                },
+                "examples": {
+                  "donation": {
+                    "value": {
+                      "id": 11,
+                      "name": "Caio Novo",
+                      "value": 75,
+                      "campaign_id": 6
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Donation updated successfully.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Donation updated successfully."
+                      },
+                      "donation": {
+                        "$ref": "#/components/schemas/Donation"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when updating donation."
+            },
+            "404": {
+              "description": "Donation not found."
+            }
+          }
+        }
+      },
+      "/donation/{id}": {
+        "get": {
+          "tags": ["Donations"],
+          "summary": "Buscar doação por Id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Donation found.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Donation found."
+                      },
+                      "donation": {
+                        "$ref": "#/components/schemas/Donation"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when searching for donation."
+            },
+            "404": {
+              "description": "Donation not found."
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Donations"],
+          "summary": "Deletar doação por Id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Donation successfully deleted.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Donation successfully deleted."
+                      },
+                      "donation": {
+                        "$ref": "#/components/schemas/Donation"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error when deleting donation."
+            },
+            "404": {
+              "description": "Donation not found."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Campaign": {
+          "type": "object",
+          "properties": {
+            "campaign_id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "target_value": {
+              "type": "number"
+            },
+            "image": {
+              "type": "string"
+            }
+          }
+        },
+        "Donation": {
+          "type": "object",
+          "properties": {
+            "donation_id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "value": {
+              "type": "number"
+            },
+            "campaign_id": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }
+  

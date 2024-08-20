@@ -1,3 +1,6 @@
+## - Observação
+A branch ``` dev-after ``` tem como objetivo dar continuidade ao projeto sem realizar alterações na branch principal enquanto o projeto entregue não for avaliado. Esta branch será mergeada à principal futuramente.
+
 # Trainee - Technical Test
 
 Este projeto consiste em uma aplicação web utilizando Node.js, Next.js, Prisma ORM, PostgreSQL e Docker Container, chamada de Solidariza. O objetivo é desenvolver, da melhor forma possível, a aplicação solicitada pela empresa QriarLabs como parte do teste técnico para uma vaga de Trainee.
@@ -33,11 +36,11 @@ Para executar a aplicação, siga as etapas:
 
      Execute o comando ``` cd backend ``` para entrar na pasta "backend"
      
-     Dentro da pasta backend, execute o comando ``` npm install ``` ou ``` yarn ``` para instalar as dependencias.
+     Dentro da pasta backend, execute o comando ``` npm install ``` ou ``` yarn ``` para instalar as dependências.
 
-     Dentro da pasta backend, ha um arquivo **docker-compose.yml** responsavel pela configuracao de um container com uma imagem PostgreSQL. Execute o comando ``` docker-compose up -d``` para subir o container.
+     Dentro da pasta backend, há um arquivo **docker-compose.yml** responsável pela configuração de um container com uma imagem PostgreSQL. Execute o comando ``` docker-compose up -d``` para subir o container.
 
-     Utilizando uma ferramenta de administracao de banco de dados, indico utilizar o DBeaver, faca a conexao com o banco com as seguintes configuracoes:
+     Utilizando uma ferramenta de administração de banco de dados, indico utilizar o DBeaver, faça a conexão com o banco com as seguintes configurações:
         
         - Host: localhost
         - Banco de dados: solidariza
@@ -45,7 +48,7 @@ Para executar a aplicação, siga as etapas:
         - Senha: password
         - Porta: 5433
     
-    Crie um arquivo ```.env``` e coloque ```DATABASE_URL="postgresql://solidariza:password@localhost:5433/solidariza?schema=public"```, que sera responsavel pela comunicacao do prisma com o banco de dados.
+    Crie um arquivo ```.env``` e coloque ```DATABASE_URL="postgresql://solidariza:password@localhost:5433/solidariza?schema=public"```, que será responsável pela comunicação do prisma com o banco de dados.
     
     Execute o comando ```npx prisma db push``` ou ```yarn prisma db push``` para enviar os schemas e migrations para o banco.
 
@@ -58,71 +61,103 @@ Para executar a aplicação, siga as etapas:
     
     Abra um novo terminal e execute o comando ```cd frontend``` para entrar na pasta de Frontend
 
-    Dentro da pasta frontend, execute o comando ``` npm install ``` ou ``` yarn ``` para instalar as dependencias.
+    Dentro da pasta frontend, execute o comando ``` npm install ``` ou ``` yarn ``` para instalar as dependências.
 
-    Apos instalar todas as dependencias, execute o comando ```npm run dev``` ou ```yarn dev``` para inicializar o frontend
+    Após instalar todas as dependências, execute o comando ```npm run dev``` ou ```yarn dev``` para inicializar o frontend
 
     Abra em seu navegador http://localhost:3000/
 
 
 ## Utilizacao da API
 
-Com a API rodando, voce pode testar os endpoints, utilizando ferramentas como Postman ou Insomnia, com as urls a seguir:
+Com a API rodando, você pode testar os endpoints, utilizando ferramentas como Postman ou Insomnia, com as urls a seguir:
 
 ### Campaigns
 
 - Para buscar todas as campanhas do banco de dados: **getCampaigns**
     
-    - Metodo: GET
+    - Método: **GET**
     - http://localhost:4000/campaign
 
 - Para buscar uma campanha pelo Id: **getCampaignById**
 
-    - Metodo: GET
+    - Método: **GET**
     - http://localhost:4000/campaign/${id}
 
 - Para criar uma campanha: **createCampaign**
 
-    - Metodo: POST
+    - Método: **POST**
     - http://localhost:4000/campaign
+    - **Body**: 
+        ``` 
+        {
+            "name": "Nome da Campanha",
+            "description": "Descrição...",
+            "target_value": 100,
+            "image": "Imagem"
+        } 
+        ```
 
 - Para atualizar uma campanha: **updateCampaign**
 
-    - Metodo: PUT
+    - Método: **PUT**
     - http://localhost:4000/campaign
+    - **Body**: 
+        ``` 
+        {
+            "id": 1,
+            "name": "Nome da Campanha Atualizado",
+            "description": "Descrição Atualizada",
+            "target_value": 200,
+            "image": "Imagem Atualizada"
+        } 
+        ```
 
 - Para deletar uma campanha: **deleteCampaign**
 
-    - Metodo: DELETE
+    - Método: **DELETE**
     - http://localhost:4000/campaign/${id}
 
 ### Donations
 
-- Para buscar todas as doacoes do banco de dados: **getDonations**
+- Para buscar todas as doação do banco de dados: **getDonations**
     
-    - Metodo: GET
+    - Método: **GET**
     - http://localhost:4000/donation
 
-- Para buscar uma doacao pelo Id: **getDonationById**
+- Para buscar uma doação pelo Id: **getDonationById**
 
-    - Metodo: GET
+    - Método: **GET**
     - http://localhost:4000/donation/${id}
 
-- Para criar uma doacao: **createDonation**
+- Para criar uma doação: **createDonation**
 
-    - Metodo: POST
+    - Método: **POST**
     - http://localhost:4000/donation
+    - **Body**: 
+        ``` 
+        {
+            "campaign_id": 1,
+            "name": "Nome do doador",
+            "value": 100
+        } 
+        ```
 
-- Para atualizar uma doacao: **updateDonation**
+- Para atualizar uma doação: **updateDonation**
 
-    - Metodo: PUT
+    - Método: **PUT**
     - http://localhost:4000/donation
+    - **Body**: 
+        ``` 
+        {
+            "id": 1,
+            "name": "Nome do Doador Atualizado",
+            "value": 150
+        } 
+        ```
 
-- Para deletar uma doacao: **deleteDonation**
+- Para deletar uma doação: **deleteDonation**
 
-    - Metodo: DELETE
+    - Método: **DELETE**
     - http://localhost:4000/donation/${id}
-
-
-
 

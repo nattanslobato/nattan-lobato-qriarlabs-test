@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { prisma } from "../../database";
+import DonationRepository from "../repositories/DonationRepository";
+import CampaignRepository from "../repositories/CampaignRepository";
 
 const getDonations = async (req: Request, res: Response) => {
     try{        
-        const donation = await prisma.donation.findMany()
+        const donation = await DonationRepository.getDonations()
         return res.status(200).send({message: "Successful search.", donation})
 
     }catch(error){
@@ -15,9 +16,7 @@ const getDonationById = async (req: Request, res: Response) => {
     try{
         const { id } = req.params
         
-        const donation = await prisma.donation.findUnique({
-            where: {donation_id: Number(id)}
-        })
+        const donation = await DonationRepository.getDonationById(Number(id))
 
         if(!donation){
             return res.status(404).send({message: "Donation not found."})
@@ -34,22 +33,14 @@ const createDonation = async (req: Request, res: Response) => {
     try{
         const { name, value, campaign_id } = req.body
 
-        const campaignExist = await prisma.campaign.findUnique({
-            where: {campaign_id: Number(campaign_id)}
-        })
+        const campaignExist = await CampaignRepository.getCampaignById(Number(campaign_id))
 
         if(!campaignExist){
             return res.status(404).send({message: "Campaign not found."})
         }
 
-        const newDonation = await prisma.donation.create({
-            data: {
-                name,
-                value,
-                campaign_id
+        const newDonation = await DonationRepository.createDonation({name, value, campaign_id})
 
-            }
-        })
         return res.status(201).send({message: "Donation created successfully.", newDonation})
 
     }catch(error){
@@ -61,21 +52,13 @@ const updateDonation = async (req: Request, res: Response) => {
     try{
         const { id, name, value } = req.body
 
-        const donationExist = await prisma.donation.findUnique({
-            where: {donation_id: Number(id)}
-        })
+        const donationExist = await DonationRepository.getDonationById(Number(id))
 
         if(!donationExist){
             return res.status(404).send({message: "Donation not found."})
         }
 
-        const donation = await prisma.donation.update({
-            where: {donation_id: Number(id)},
-            data: {
-                name,
-                value
-            }
-        })
+        const donation = await DonationRepository.updateDonation(Number(id), {name, value})
 
         return res.status(200).send({message: "Donation updated successfully.", donation})
 
@@ -88,17 +71,13 @@ const deleteDonation = async (req: Request, res: Response) => {
     try{
         const { id } = req.params
 
-        const donationExist = await prisma.donation.findUnique({
-            where: {donation_id: Number(id)}
-        })
+        const donationExist = await DonationRepository.getDonationById(Number(id))
 
         if(!donationExist){
             return res.status(404).send({message: "Donation not found."})
         }
 
-        const donation = await prisma.donation.delete({
-            where: {donation_id: Number(id)}
-        })
+        const donation = await DonationRepository.deleteDonation(Number(id))
 
         return res.status(200).send({message: "Donation successfully deleted.", donation})
 

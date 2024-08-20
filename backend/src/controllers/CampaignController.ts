@@ -1,13 +1,9 @@
 import { Request, Response } from "express";
-import { prisma } from "../../database";
+import CampaignRepository from "../repositories/CampaignRepository";
 
 const getCampaigns = async (req: Request, res: Response) => {
     try{
-        const campaign = await prisma.campaign.findMany({
-            include: {
-                Donation: true
-            }
-        })
+        const campaign = await CampaignRepository.getCampaigns()
         return res.status(200).send({message: "Successful search.", campaign})
 
     }catch(error){
@@ -19,12 +15,7 @@ const getCampaignById = async (req: Request, res: Response) => {
     try{
         const { id } = req.params
         
-        const campaign = await prisma.campaign.findUnique({
-            where: {campaign_id: Number(id)},
-            include: {
-                Donation: true
-            }
-        })
+        const campaign = await CampaignRepository.getCampaignById(Number(id))
 
         if(!campaign){
             return res.status(404).send({message: "Campaign not found."})
@@ -41,14 +32,8 @@ const createCampaign = async (req: Request, res: Response) => {
     try{
         const {name, description, target_value, image } = req.body
 
-        const newCampaign = await prisma.campaign.create({
-            data: {
-                name,
-                description,
-                target_value,
-                image
-            }
-        })
+        const newCampaign = await CampaignRepository.createCampaign({name, description, target_value, image})
+        
         return res.status(201).send({message: "Campaign created successfully.", newCampaign})
 
     }catch(error){
@@ -60,23 +45,13 @@ const updateCampaign = async (req: Request, res: Response) => {
     try{
         const {id, name, description, target_value, image } = req.body
 
-        const campaignExist = await prisma.campaign.findUnique({
-            where: {campaign_id: Number(id)}
-        })
+        const campaignExist = await CampaignRepository.getCampaignById(Number(id))
 
         if(!campaignExist){
             return res.status(404).send({message: "Campaign not found."})
         }
 
-        const campaign = await prisma.campaign.update({
-            where: {campaign_id: Number(id)},
-            data: {
-                name,
-                description,
-                target_value,
-                image
-            }
-        })
+        const campaign = await CampaignRepository.updateCampaign(Number(id), {name, description, target_value, image})
 
         return res.status(200).send({message: "Campaign updated successfully.", campaign})
 
@@ -89,18 +64,13 @@ const deleteCampaign = async (req: Request, res: Response) => {
     try{
         const { id } = req.params
 
-        const campaignExist = await prisma.campaign.findUnique({
-            where: {campaign_id: Number(id)}
-        })
+        const campaignExist = await CampaignRepository.getCampaignById(Number(id))
 
         if(!campaignExist){
             return res.status(404).send({message: "Campaign not found."})
         }
 
-        const campaign = await prisma.campaign.delete({
-            where: {campaign_id: Number(id)}
-        })
-
+        const campaign = await CampaignRepository.deleteCampaign(Number(id))
         return res.status(200).send({message: "Campaign successfully deleted.", campaign})
 
     }catch(error){

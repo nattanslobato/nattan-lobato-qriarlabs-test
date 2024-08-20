@@ -1,5 +1,5 @@
 import { Router } from "express";
-import CampaignController from "../modules/campaign/CampaignController";
+import CampaignController from "../controllers/CampaignController";
 
 const campaignRoutes = Router();
 

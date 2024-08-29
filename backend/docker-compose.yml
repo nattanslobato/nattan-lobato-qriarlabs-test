@@ -5,9 +5,15 @@ services:
     container_name: postgres-solidariza
     image: postgres
     restart: always
+    networks:
+      - api
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=solidariza
       - POSTGRES_DB=solidariza
     ports:
       - '5433:5432'
+
+networks:
+  api:
+    driver: bridge

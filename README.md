@@ -72,3 +72,20 @@ Para executar a aplicação, siga as etapas:
 
 Com a API rodando, você pode testar os endpoints através do Swagger acessando a URL: 
 http://localhost:4000/docs/
+
+
+
+
+# COMPLEMENTOS
+
+## DOCKER
+
+### Subir o postgreSQL
+
+comando: ``` docker-compose up -d ``` 
+
+### Subir a API
+
+comando: ``` docker build -t backend-api .``` para buildar a imagem do Dockerfile.
+
+comando: ``` docker run --network backend_api -it --rm -p 4000:4000 -e PORT=4000 -e DATABASE_URL="postgresql://solidariza:password@postgres-solidariza:5432/solidariza?schema=public" backend-api ``` para subir a API.

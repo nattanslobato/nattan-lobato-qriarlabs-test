@@ -6,6 +6,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package*.json yarn.lock ./
+RUN apk add --no-cache openssl ca-certificates
 RUN yarn install --frozen-lockfile
 COPY . ./
 RUN yarn build
@@ -18,7 +19,7 @@ WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package*.json ./
 COPY --from=build /app/yarn.lock ./
-COPY --from=build /app/dist ./
+COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma/schema.prisma ./prisma/
 COPY --from=build /app/prisma/migrations/ ./prisma/
 
@@ -29,4 +30,4 @@ ENTRYPOINT ["entrypoint.sh"]
 
 EXPOSE 4000
 
-CMD ["yarn", "dev"]
+CMD ["yarn", "start"]

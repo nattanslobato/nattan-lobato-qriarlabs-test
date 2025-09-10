@@ -46,9 +46,9 @@ Para executar a aplicação, siga as etapas:
         - Banco de dados: solidariza
         - Usuario: solidariza
         - Senha: password
-        - Porta: 5433
+        - Porta: 5432
     
-    Crie um arquivo ```.env``` e coloque ```DATABASE_URL="postgresql://solidariza:password@localhost:5433/solidariza?schema=public"```, que será responsável pela comunicação do prisma com o banco de dados.
+    Crie um arquivo ```.env``` e coloque ```DATABASE_URL="postgresql://solidariza:password@localhost:5432/solidariza?schema=public"```, que será responsável pela comunicação do prisma com o banco de dados.
     
     Execute o comando ```npx prisma db push``` ou ```yarn prisma db push``` para enviar os schemas e migrations para o banco.
 

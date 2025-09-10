@@ -1,13 +1,31 @@
 version: '3.8'
-
 services:
   db:
     container_name: postgres-solidariza
     image: postgres
-    restart: always
+    # restart: always
+    networks:
+      - api
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=solidariza
       - POSTGRES_DB=solidariza
     ports:
-      - '5433:5432'
+      - '5432:5432'
+  api:
+    image: backend-api
+    build:
+      context: .
+    depends_on:
+      - db
+    networks:
+      - api
+    environment:
+      - PORT=4000
+      - DATABASE_URL=postgresql://solidariza:password@postgres-solidariza:5432/solidariza?schema=public
+    ports:
+      - '4000:4000'
+
+networks:
+  api:
+    driver: bridge

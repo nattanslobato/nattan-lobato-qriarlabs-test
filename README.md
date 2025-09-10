@@ -1,6 +1,3 @@
-## - Observação
-A branch ``` dev-after ``` tem como objetivo dar continuidade ao projeto sem realizar alterações na branch principal enquanto o projeto entregue não for avaliado. Esta branch será mergeada à principal futuramente.
-
 # Trainee - Technical Test
 
 Este projeto consiste em uma aplicação web utilizando Node.js, Next.js, Prisma ORM, PostgreSQL e Docker Container, chamada de Solidariza. O objetivo é desenvolver, da melhor forma possível, a aplicação solicitada pela empresa QriarLabs como parte do teste técnico para uma vaga de Trainee.
@@ -26,20 +23,20 @@ Para executar a aplicação, siga as etapas:
     
 
 2. Clone o repositório deste projeto 
-    - Abra a pasta onde deseja clonar o repositório e execute o comando "git clone https://github.com/nattanslobato/nattan-lobato-qriarlabs-test.git"
+    - Abra a pasta onde deseja clonar o repositório e execute o comando ``` "git clone https://github.com/nattanslobato/nattan-lobato-qriarlabs-test.git" ```
 
-3. Abra o projeto utilizando o Visual Studio.
+3. Abra o projeto utilizando o Visual Studio Code.
 
 4. Siga os passos a seguir:
 
-    ### API
+    ## Backend (Docker)
 
-     Execute o comando ``` cd backend ``` para entrar na pasta "backend"
-     
-     Dentro da pasta backend, execute o comando ``` npm install ``` ou ``` yarn ``` para instalar as dependências.
+     Abra o terminal e execute o comando ``` cd backend ``` para entrar na pasta "backend"
 
-     Dentro da pasta backend, há um arquivo **docker-compose.yml** responsável pela configuração de um container com uma imagem PostgreSQL. Execute o comando ``` docker-compose up -d``` para subir o container.
+     Crie um arquivo ```.env``` dentro da pasta backend e copie ```DATABASE_URL="postgresql://solidariza:password@postgres-solidariza:5432/solidariza?schema=public""``` dentro do arquivo, que será responsável pela comunicação do prisma com o banco de dados.
 
+     Dentro da pasta backend, há um arquivo de configuração Docker "**docker-compose.yml**". Execute o comando ``` docker-compose build ``` e, após finalizar o build, execute o comando ``` docker-compose up -d``` para subir o container.
+    
      Utilizando uma ferramenta de administração de banco de dados, indico utilizar o DBeaver, faça a conexão com o banco com as seguintes configurações:
         
         - Host: localhost
@@ -47,17 +44,16 @@ Para executar a aplicação, siga as etapas:
         - Usuario: solidariza
         - Senha: password
         - Porta: 5432
-    
-    Crie um arquivo ```.env``` e coloque ```DATABASE_URL="postgresql://solidariza:password@localhost:5432/solidariza?schema=public"```, que será responsável pela comunicação do prisma com o banco de dados.
-    
-    Execute o comando ```npx prisma db push``` ou ```yarn prisma db push``` para enviar os schemas e migrations para o banco.
-
-    Por fim, execute o comando ```npm run dev``` ou ```yarn dev``` para rodar a API.
 
     Abra em seu navegador http://localhost:4000/ para verificar a API funcionando.
 
+    ### Utilizacao da API com Swagger
 
-    ### Frontend
+    Com a API rodando, você pode testar os endpoints através do Swagger acessando a URL: 
+    http://localhost:4000/docs/
+
+
+    ## Frontend (Local)
     
     Abra um novo terminal e execute o comando ```cd frontend``` para entrar na pasta de Frontend
 
@@ -66,26 +62,3 @@ Para executar a aplicação, siga as etapas:
     Após instalar todas as dependências, execute o comando ```npm run dev``` ou ```yarn dev``` para inicializar o frontend
 
     Abra em seu navegador http://localhost:3000/
-
-
-## Utilizacao da API
-
-Com a API rodando, você pode testar os endpoints através do Swagger acessando a URL: 
-http://localhost:4000/docs/
-
-
-
-
-# COMPLEMENTOS
-
-## DOCKER
-
-### Subir o postgreSQL
-
-comando: ``` docker-compose up -d ``` 
-
-### Subir a API
-
-comando: ``` docker build -t backend-api .``` para buildar a imagem do Dockerfile.
-
-comando: ``` docker run --network backend_api -it --rm -p 4000:4000 -e PORT=4000 -e DATABASE_URL="postgresql://solidariza:password@postgres-solidariza:5432/solidariza?schema=public" backend-api ``` para subir a API.

@@ -5,6 +5,8 @@ export const HeaderDiv = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    margin-bottom: 1rem;
+    margin-color: red;
     color: #000;
 `
 

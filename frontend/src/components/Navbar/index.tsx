@@ -1,17 +1,21 @@
 "use client"
 
-import { NavbarDiv, Logo } from "./Navbar.style";
+import { NavbarDiv, NavbarItems,  Logo, NavbarButton } from "./Navbar.style";
 import Link from "next/link"
 
 const Navbar = () => {
     return (
         <NavbarDiv>
+            <NavbarItems>
             <Link href={"/"}>
                 <Logo />
             </Link>
-            <Link href={"/"}>
-                <h1>Campanhas</h1>
+            <Link href={"/CreateCampaign"}>
+                <NavbarButton>
+                    Nova Campanha
+                </NavbarButton>
             </Link>
+            </NavbarItems>
         </NavbarDiv>
     )
 }

@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { Container } from "./HomePage.style";
 import CampaignList from "@/components/CampaignList";
 import Navbar from "@/components/Navbar";
+import { BackgroundDiv } from "./HomePage.style";
 
 interface HomePageProps {
   children?: React.ReactNode;
@@ -13,12 +14,12 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = () => {
   return (
-    <Container>
-        <Navbar/>
-        <Header/>
+    <>
+      <Navbar/>
+      <Container>
         <CampaignList/> 
-
-    </Container>
+      </Container>
+    </>
   );
 }
 export default HomePage;

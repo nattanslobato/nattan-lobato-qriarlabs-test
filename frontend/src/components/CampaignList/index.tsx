@@ -2,6 +2,7 @@ import { Container } from "./CampaignList.styles";
 import CampaignListCard from "../CampaignListCard";
 import React, { useEffect, useState } from "react";
 import api from "@/services/api";
+import Header from "../Header";
 
 interface Campaign {
     campaign_id: number;
@@ -40,6 +41,7 @@ const CampaignList: React.FC = () => {
 
     return(
         <Container>
+            <Header/>
             {campaigns.map((campaign) => (
                 <CampaignListCard key={campaign.campaign_id} campaign={campaign} onDelete={handleDelete} />
             ))}

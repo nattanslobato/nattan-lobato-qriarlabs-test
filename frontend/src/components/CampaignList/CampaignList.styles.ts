@@ -13,7 +13,8 @@ export const CampaignsContainer = styled.div`
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0 1rem;
+    max-width: 80rem;
 
     @media (max-width: 76rem) { 
         justify-content: center; 

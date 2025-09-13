@@ -1,19 +1,17 @@
 
 import Link from "next/link";
 import React from "react";
-import 
-{ Container, 
-    Image, 
-    HeadCardDiv, 
+import {
+    Container,
+    Image,
     CampaignName,
-    FeatDiv,
-    CampaignEdit,
-    CampaignDelete,
-    CounterDiv,
+    TextCardDiv,
+    ProgressContainer,
+    ProgressBar,
     ValueDiv,
     PercentageDiv
-} 
-from "./CampaignListCard.style";
+}
+    from "./CampaignListCard.style";
 
 
 interface CampaignCardProps {
@@ -24,10 +22,10 @@ interface CampaignCardProps {
         image: string;
         Donation: { value: number }[];
     };
-    onDelete: (id: number) => void; 
+    onDelete: (id: number) => void;
 }
 
-const CampaignListCard: React.FC<CampaignCardProps> = ({campaign, onDelete}) => {
+const CampaignListCard: React.FC<CampaignCardProps> = ({ campaign, onDelete }) => {
     const totalDonationValue = campaign.Donation.reduce((sum: number, donation) => sum + donation.value, 0);
     const percentage = (totalDonationValue / campaign.target_value) * 100;
     const formattedPercentage = percentage.toFixed(2);
@@ -39,34 +37,28 @@ const CampaignListCard: React.FC<CampaignCardProps> = ({campaign, onDelete}) => 
     };
 
 
-    return(
+    return (
         <Container>
             <Link href={"/Campaign"}>
-            <Image src={"/imagem_teste.png"}/>
+                <Image src={"/image.jpg"} />
+                <CampaignName>
+                    <p>{campaign.name}</p>
+                </CampaignName>
+                <TextCardDiv>
+                    <p>Arrecadado</p>
+                    <p>Meta</p>
+                </TextCardDiv>
+                <ValueDiv>
+                        <p>R$ {totalDonationValue}</p>
+                        <strong><p>R$ {campaign.target_value}</p></strong>
+                </ValueDiv>
+                <ProgressContainer>
+                    <ProgressBar percentage={percentage}/>
+                </ProgressContainer>
+                <PercentageDiv>
+                    <p>{formattedPercentage}%</p>
+                </PercentageDiv>
             </Link>
-            <HeadCardDiv>
-                <Link href={"/Campaign"}>
-                    <CampaignName>
-                        <p>{campaign.name}</p>
-                    </CampaignName>
-                </Link>
-                <FeatDiv>
-                    <CampaignEdit/>
-                    <CampaignDelete onClick={handleDeleteClick}/>
-                </FeatDiv>
-            </HeadCardDiv>
-                <CounterDiv>
-                    <ValueDiv>
-                        <h3><strong>R$ {totalDonationValue}</strong></h3>
-                    </ValueDiv>
-                    <h1><strong> de </strong></h1>
-                    <ValueDiv>
-                        <h3><strong>R$ {campaign.target_value}</strong></h3>
-                    </ValueDiv>
-                    <PercentageDiv>
-                        <h3><strong>{formattedPercentage}%</strong></h3>
-                    </PercentageDiv>
-                </CounterDiv>
         </Container>
     )
 }

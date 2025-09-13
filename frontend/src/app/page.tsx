@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import React from "react";
-import Header from "../components/Header";
+import Header from "../components/CampaignListHeader";
 import { Container } from "./HomePage.style";
 import CampaignList from "@/components/CampaignList";
 import Navbar from "@/components/Navbar";
-import { BackgroundDiv } from "./HomePage.style";
 
 interface HomePageProps {
   children?: React.ReactNode;

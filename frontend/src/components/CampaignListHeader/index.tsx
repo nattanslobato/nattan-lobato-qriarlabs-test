@@ -1,22 +1,23 @@
 "use client"
 
 import Link from "next/link";
-import { HeaderDiv, TitleDiv, CreateCampaignButton} from "./Header.styles";
+import { HeaderDiv, TitleDiv, CreateCampaignButton} from "./CampaignListHeader.styles";
 
-const Header = () => {
+const CampaignListHeader = () => {
     return (
         <HeaderDiv>
             <TitleDiv>
-                    <h1>Campanhas</h1>
+                <h1>Campanhas</h1>
             </TitleDiv>
         
             <Link href={"/CreateCampaign"}>
                 <CreateCampaignButton>
-                    Criar Campanha
+                    <span>+ </span>
+                    Criar Nova Campanha
                 </CreateCampaignButton>
             </Link>
         </HeaderDiv>
     )
 }
 
-export default Header;
+export default CampaignListHeader;

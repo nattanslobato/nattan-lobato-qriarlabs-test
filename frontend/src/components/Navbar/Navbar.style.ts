@@ -9,7 +9,7 @@ export const NavbarDiv = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 8rem;
+    height: 6rem;
 `
 
 export const NavbarItems = styled.div`
@@ -19,10 +19,9 @@ export const NavbarItems = styled.div`
     justify-content: space-between;
     padding: 0.5rem 3rem;
     width: 80rem; 
-
 `
 
-export const Logo = styled.img.attrs({src: "/logo1.png", alt: "Solidariza logo"})`
+export const Logo = styled.img.attrs({src: "/logo.png", alt: "Solidariza logo"})`
     width: 7rem;
 `
 

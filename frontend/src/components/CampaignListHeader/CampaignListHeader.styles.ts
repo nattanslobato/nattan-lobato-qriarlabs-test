@@ -5,23 +5,25 @@ export const HeaderDiv = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-    margin-bottom: 1rem;
-    margin-color: red;
-    color: #000;
+    width: 100%;
 `
 
 export const TitleDiv = styled.div`
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1rem; 
+
 `
 
 export const CreateCampaignButton = styled.button`
-    background-color: #518fcd;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     padding: 0.8rem;
-
-    font-weight: bold;
-    font-size: 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: #518fcd;
     color: #fff;
     
     cursor: pointer;

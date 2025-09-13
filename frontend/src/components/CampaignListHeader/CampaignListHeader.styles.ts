@@ -2,10 +2,19 @@ import styled from "styled-components";
 
 export const HeaderDiv = styled.div`
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
     padding: 0 2rem;
     width: 100%;
+`
+
+export const HeaderItemsDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 3rem;
+    width: 100%;       
+    max-width: 80rem;     
 `
 
 export const TitleDiv = styled.div`

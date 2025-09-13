@@ -74,12 +74,9 @@ const CreateCampaign: React.FC = () => {
                                 Voltar
                             </ButtonBack>
                         </Link>
-                        <ButtonConfirm
-                            type="submit"
-                            >
+                        <ButtonConfirm type="submit">
                             Cadastrar
                         </ButtonConfirm>
-
                     </ButtonDiv>
                 </CampaignForm>
         </div>
